@@ -1,0 +1,27 @@
+modbus:
+  - name: "RS485_TempHumid"  # 自定義 Modbus 設備名稱
+    type: tcp
+    host: 192.168.168.253
+    port: 502
+    sensors:
+      - name: "rs485_temp"  # 溫度感測器名稱
+        slave: 1
+        unique_id: "rs485_temp"
+        unit_of_measurement: "°C"  # 溫度單位
+        address: 0x00   # 寄存器位址
+        input_type: holding
+        data_type: int16  # 資料格式（根據設備手冊選擇）
+        scale: 0.1  # 如果數據需要縮放，設定比例，例如 0.1 代表數據需除以 10
+        precision: 1  # 顯示的小數位數
+        scan_interval : 60
+        
+      - name: "rs485_humi"  # 濕度感測器名稱
+        slave: 1
+        unique_id: "rs485_humi"
+        unit_of_measurement: "%"  # 濕度單位
+        address: 0x01  # 寄存器位址
+        input_type: holding
+        data_type: int16  # 資料格式
+        scale: 0.1  # 縮放比例（若不需要，則設定為 1）
+        precision: 1  # 顯示的小數位數
+        scan_interval : 60
